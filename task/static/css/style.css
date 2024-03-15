@@ -1,0 +1,369 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Outfit';
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.mainTitle {
+    font-size: 40px;
+    margin-left: 1rem;
+    font-weight: 500;
+}
+
+.Description {
+    font-size: 16px;
+    margin: 0.5rem 0 40px 3.7rem;
+    font-weight: 400;
+}
+
+.task {
+    width: 500px;
+    min-height: 80px;
+    border: none;
+    background-color: #E3E8EF;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin: 0px 0px 20px 0px;
+    border-radius: 14px;
+}
+
+.task:hover {
+    transform: scale(1.02);
+}
+
+.icon-container {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: #F8FAFC;
+    border-radius: 14px;
+    user-select: none;
+}
+
+.status {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    margin-left: auto;
+    border-radius: 14px;
+}
+
+.in-progress-icon {
+    background-color: #E9A23B;
+}
+
+.completed-icon {
+    background-color: #32D657;
+}
+
+.nowork-icon {
+    background-color: #DD524C;
+}
+
+.container {
+    margin-top: 2.5rem;
+}
+
+.title-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+    width: 80%;
+}
+
+.title {
+    font-size: 20px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.text {
+    font-size: 16px;
+}
+
+.Addtask {
+    width: 500px;
+    height: 50px;
+    border: none;
+    background-color: #F5E8D5;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 14px;
+    user-select: none;
+}
+
+.Addtask:hover {
+    transform: scale(1.02);
+}
+
+.addtask-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: #E9A23B;
+    border-radius: 14px;
+}
+
+.titleAdd {
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 732px;
+    height: 95%;
+    max-width: none;
+    max-height: none;
+    margin: 20px 20px 20px 20px;
+    background-color: #fff;
+    box-shadow: -4px 0 8px rgba(0, 0, 0, 0.1);
+    border-radius: 14px;
+    z-index: 1000;
+}
+
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.close,
+.closeCreate {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 22px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: #97A3B6;
+}
+
+input {
+    width: 100%;
+    height: 25px;
+    padding: 8px;
+    padding-left: 8px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #97A3B6;
+    font-size: 18px;
+}
+
+
+textarea {
+    width: 100%;
+    height: 180px;
+    padding: 8px;
+    padding-left: 10px;
+    margin-bottom: 15px;
+    resize: none;
+    border-radius: 8px;
+    border: 1px solid #97A3B6;
+    font-size: 18px;
+}
+
+textarea::placeholder {
+    font-size: 18px;
+    color: #97A3B6;
+    font-weight: 300;
+    padding-left: 10px;
+}
+
+
+textarea:focus,
+textarea:active {
+    border-color: #3662E3;
+}
+
+.icon-section,
+.status-section {
+    margin-bottom: 15px;
+    user-select: none;
+}
+
+.icon-option {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 20px;
+    background-color: #E3E8EF;
+    user-select: none;
+}
+
+.icon-option:focus {
+    background-color: #E9A23B;
+    outline: none;
+}
+
+.button-section {
+    margin-top: 100px;
+    text-align: right;
+}
+
+.deleteBtn,
+.saveBtn {
+    width: 130px;
+    height: 35px;
+    font-size: 16px;
+    font-weight: 400;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deleteBtn {
+    background-color: #97A3B6;
+    color: white;
+    margin-right: 15px;
+}
+
+.saveBtn {
+    background-color: #3662E3;
+    color: white;
+}
+
+.deleteBtn img,
+.saveBtn img {
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-left: 6px;
+}
+
+
+.button-section-icon {
+    margin-top: 10px;
+}
+
+
+.taskdetails-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.status-section {
+    display: flex;
+    flex-wrap: wrap;   
+}
+
+.status-option {
+    display: flex;
+    align-items: center;
+    width: 46%;
+    height: 50px;
+    border: 3px solid #E3E8EF;
+    border-radius: 14px;
+    margin: 0px 12px 8px 0px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.status-option.selected {
+    border-color: #3662E3;
+}
+
+.icon-option.selected {
+    background-color: #F5D565;
+}
+
+.status-option span {
+    margin-left: 12px;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.status-icon-progress {
+    height: 100%;
+    width: 15%;
+    border-radius: 14px;
+    background-color: #E9A23B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-icon-completed {
+    height: 100%;
+    width: 15%;
+    border-radius: 14px;
+    background-color: #32D657;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-icon-nowork {
+    height: 100%;
+    width: 15%;
+    border-radius: 14px;
+    background-color: #DD524C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.in-progress {
+    background-color: #F5D565;
+}
+
+.completed {
+    background-color: #A0ECB1;
+}
+
+.nowork {
+    background-color: #F7D4D3;
+}

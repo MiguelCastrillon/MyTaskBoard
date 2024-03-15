@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'images/Logo.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>My Task Board</title>
+</head>
+<body>
+    
+    <div class="container">
+        <header>
+            <div class="title">
+                <img src="{% static 'images/Logo.svg' %}" alt="Logo" class="logo">
+                <span class="mainTitle">My Task Board</span>
+                <p class="Description">Tasks to keep organised</p>
+            </div> 
+        </header>
+        <main>
+            {% for task in tasks %}
+            <div class="task open-modal {% if task.status == 'in_progress' %}in-progress{% elif task.status == 'completed' %}completed{% elif task.status == 'wont_do' %}nowork{% endif %}" id="openModal">
+                <div class="icon-container">{{ task.icon }}</div>
+                <div class="title-container">
+                    <div class="title">{{ task.title }}</div>
+                    <div class="text">{{ task.description }}</div>
+                </div>
+                {% if task.status != '' %}
+                <div class="status {% if task.status == 'in_progress' %}in-progress-icon{% elif task.status == 'completed' %}completed-icon{% else %}nowork-icon{% endif %}">
+                    {% if task.status == "in_progress" %}
+                        <img src="{% static 'images/Time_atack_duotone.svg' %}" alt="In Progress">
+                    {% elif task.status == "completed" %}
+                        <img src="{% static 'images/Done_round_duotone.svg' %}" alt="Completed">
+                    {% elif task.status == 'wont_do' %}
+                        <img src="{% static 'images/close_ring_duotone.svg' %}" alt="Won't Do">
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+            <div id="myModal" class="modal">
+                <div class="fondo" id="fondo"></div>
+                <div class="modal-content">
+                    <span class="close">
+                        <img src="{% static 'images/close_ring_duotone-1.svg' %}" alt="">
+                    </span>
+                    <h2 class="taskdetails-title">Task Details</h2>
+                    <form method="post" action="{% url 'edit' task.id %}">
+                        {% csrf_token %}
+                        <label for="taskName">Task Name</label>
+                        <input type="text" id="taskName" name="taskName" value="{{ task.title }}" required>
+            
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" rows="4" placeholder="Enter a short description">{{ task.description }}</textarea>
+                        
+                        <input type="hidden" id="selectedIcon" name="selectedIcon" value="{{ task.icon }}">
+                        <input type="hidden" id="selectedStatus" name="selectedStatus" value="{{ task.status }}">
+    
+                        <div class="icon-section">
+                            <label>Icon</label>
+                            <div class="icon-option" data-icon="🖥️">🖥️</div>
+                            <div class="icon-option" data-icon="💬">💬</div>
+                            <div class="icon-option" data-icon="☕">☕</div>
+                            <div class="icon-option" data-icon="🏋️‍♂️">🏋️‍♂️</div>
+                            <div class="icon-option" data-icon="📚">📚</div>
+                            <div class="icon-option" data-icon="⏰">⏰</div>
+                        </div>
+    
+                        <label>Status</label>
+                        <div class="status-section">
+                            <div class="status-option" data-status="in_progress">
+                                <div class="status-icon-progress">
+                                    <img src="{% static 'images/Time_atack_duotone.svg' %}" alt="In Progress">
+                                </div>
+                                <span>In Progress</span>
+                            </div>
+                            <div class="status-option" data-status="completed">
+                                <div class="status-icon-completed">
+                                    <img src="{% static 'images/Done_round_duotone.svg' %}" alt="Completed">
+                                </div>
+                                <span>Completed</span>
+                            </div>
+                            <div class="status-option" data-status="wont_do">
+                                <div class="status-icon-nowork">
+                                    <img src="{% static 'images/close_ring_duotone.svg' %}" alt="Won't Do">
+                                </div>
+                                <span>Won't Do</span>
+                            </div>
+                        </div>
+            
+                        <div class="button-section">
+                            <a href="{% url 'delete' id=task.id %}">
+                                <button type="button" class="deleteBtn" id="deleteBtn">
+                                    Delete
+                                    <img src="{% static 'images/Trash.svg' %}" alt="">
+                                </button>
+                            </a>
+                            <button type="submit" class="saveBtn" id="saveBtn">
+                                Save
+                                <img src="{% static 'images/Done_round.svg' %}" alt="">
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="Addtask open-modal" id="openModalCreate">
+                <div class="addtask-icon">
+                    <img src="{% static 'images/Add_round_duotone.svg' %}" alt="">
+                </div>
+                <div class="title-container">
+                    <div class="titleAdd">Add new task</div>
+                </div> 
+            </div> 
+        </main>
+        
+
+        <div id="myModalCreate" class="modal">
+            <div class="modal-content">
+                <span class="closeCreate">
+                    <img src="{% static 'images/close_ring_duotone-1.svg' %}" alt="">
+                </span>
+                <h2 class="taskdetails-title">Create Task</h2>
+                <form method="post" action="{% url 'taskboard' %}">
+                    {% csrf_token %}
+                    <label for="taskName">Task Name</label>
+                    <input type="text" id="taskName" name="taskName" required>
+        
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="4" placeholder="Enter a short description"></textarea>
+                    
+                    <input type="hidden" id="selectedIcon" name="selectedIcon" value="">
+                    <input type="hidden" id="selectedStatus" name="selectedStatus" value="">
+
+                    <div class="icon-section">
+                        <label>Icon</label>
+                        <div class="icon-option" data-icon="🖥️">🖥️</div>
+                        <div class="icon-option" data-icon="💬">💬</div>
+                        <div class="icon-option" data-icon="☕">☕</div>
+                        <div class="icon-option" data-icon="🏋️‍♂️">🏋️‍♂️</div>
+                        <div class="icon-option" data-icon="📚">📚</div>
+                        <div class="icon-option" data-icon="⏰">⏰</div>
+                    </div>
+
+                    <div class="button-section">
+                        <button type="submit" class="saveBtn" id="saveBtn">
+                            Save
+                            <img src="{% static 'images/Done_round.svg' %}" alt="">
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script> 
+</body>
+</html>
