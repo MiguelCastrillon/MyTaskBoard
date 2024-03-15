@@ -19,7 +19,7 @@ def main(request):
         'tasks': task[::-1]
     }
 
-    return render(request, 'taskboard.html', context)
+    return render(request, 'index.html', context)
 
 def delete(request, id):
     Task.objects.filter(id=id).delete()
